@@ -98,4 +98,18 @@ public class BookRepositoryTest {
         // Find all
         assertEquals(0, bookRepository.findAll().size());
     }
+
+    @Test(expected = Exception.class)
+    @InSequence(8)
+    public void shouldCannotCreateInvalidBook() {
+        // Creates a book
+        Book book = new Book("isbn", null, 12F, 123, Language.ENGLISH, new Date(), "imageURL", "description");
+        bookRepository.create(book);
+    }
+
+    @Test(expected = Exception.class)
+    @InSequence(9)
+    public void shouldCannotFindBookWithInvalidId() {
+        bookRepository.find(null);
+    }
 }
